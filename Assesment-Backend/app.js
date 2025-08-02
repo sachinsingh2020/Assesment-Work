@@ -11,7 +11,6 @@ config({
 
 const app = express();
 
-// Middleware
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(
@@ -21,13 +20,10 @@ app.use(
 );
 
 app.use(cookieParser());
-
-// Setup CORS to handle multiple origins
 const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:3000"];
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow requests with no origin (e.g., mobile apps, curl requests)
       if (!origin) return callback(null, true);
       if (allowedOrigins.indexOf(origin) === -1) {
         const msg =
@@ -41,7 +37,6 @@ app.use(
   })
 );
 
-// importing routes
 import user from "./routes/userRoutes.js";
 import problem from "./routes/problemRoutes.js";
 import solution from "./routes/solutionRoutes.js";
@@ -49,9 +44,7 @@ import solution from "./routes/solutionRoutes.js";
 app.use("/api/v1/user", user);
 app.use("/api/v1/problem", problem);
 app.use("/api/v1/solution", solution);
-// --
 
-// Printing server is working
 app.get("/", (req, res) => {
   res.send("Server is working");
 });

@@ -4,7 +4,6 @@ import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import cloudinary from "cloudinary";
 import getDataUri from "../utils/dataUri.js";
 
-// POST /api/v1/problems
 export const createProblem = catchAsyncError(async (req, res, next) => {
   const { title, description, location } = req.body;
 
@@ -47,7 +46,6 @@ export const createProblem = catchAsyncError(async (req, res, next) => {
   });
 });
 
-// GET /api/v1/problems
 export const getAllProblems = catchAsyncError(async (req, res) => {
   const problems = await Problem.find().populate("user", "fullName email");
   res.status(200).json({
@@ -56,7 +54,6 @@ export const getAllProblems = catchAsyncError(async (req, res) => {
   });
 });
 
-// GET /api/v1/problems/:id
 export const getSingleProblem = catchAsyncError(async (req, res, next) => {
   const problem = await Problem.findById(req.params.id).populate(
     "user",
@@ -67,7 +64,6 @@ export const getSingleProblem = catchAsyncError(async (req, res, next) => {
   res.status(200).json({ success: true, problem });
 });
 
-// DELETE /api/v1/problems/:id
 export const deleteProblem = catchAsyncError(async (req, res, next) => {
   const problem = await Problem.findById(req.params.id);
 

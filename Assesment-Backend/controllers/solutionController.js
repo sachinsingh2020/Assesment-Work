@@ -44,7 +44,6 @@ export const getSolutionsForProblem = catchAsyncError(
   }
 );
 
-// PUT /api/v1/solution/upvote/:solutionId
 export const toggleUpvote = catchAsyncError(async (req, res, next) => {
   const { solutionId } = req.params;
   const userId = req.user._id;
@@ -69,7 +68,6 @@ export const toggleUpvote = catchAsyncError(async (req, res, next) => {
   }
 });
 
-// DELETE /api/v1/solution/:solutionId
 export const deleteSolution = catchAsyncError(async (req, res, next) => {
   const solution = await Solution.findById(req.params.solutionId);
 

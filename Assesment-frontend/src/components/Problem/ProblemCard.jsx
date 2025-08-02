@@ -7,14 +7,12 @@ const ProblemCard = ({ problem, loggedInUserId,handleDeleteProblem }) => {
 
   return (
     <div className="relative group bg-white shadow-md rounded-lg overflow-hidden transition-all duration-300">
-      {/* Image */}
       <img
         src={problem.image?.url}
         alt={problem.title}
         className="w-full h-48 object-cover"
       />
 
-      {/* Overlay on hover */}
       <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-500 flex items-center justify-center">
         <div className="opacity-0 group-hover:opacity-100 transform group-hover:scale-110 transition-all duration-500 flex gap-4">
           <Link to={`/problem/${problem._id}`}>
@@ -37,7 +35,6 @@ const ProblemCard = ({ problem, loggedInUserId,handleDeleteProblem }) => {
         </div>
       </div>
 
-      {/* Text content below the image */}
       <div className="p-4">
         <h3 className="text-lg font-bold mb-2">{problem.title}</h3>
         <p className="text-gray-600 text-sm mb-1">

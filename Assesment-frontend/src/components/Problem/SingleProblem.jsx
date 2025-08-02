@@ -1,8 +1,7 @@
-// components/Problem/SingleProblem.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSingleProblem, deleteProblem } from '../../redux/actions/problem';
+import { getSingleProblem } from '../../redux/actions/problem';
 import {
   getSolutionsForProblem,
   createSolution,
@@ -15,7 +14,6 @@ import SolutionCard from '../Solution/SolutionCard';
 const SingleProblem = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { singleProblem, loading } = useSelector((state) => state.problem);
   const { user } = useSelector((state) => state.user);
@@ -36,7 +34,6 @@ const handleSubmitSolution = async (e) => {
     await dispatch(createSolution(id, description));
     setDescription('');
 
-    // Optional delay of 500ms
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     await dispatch(getSolutionsForProblem(id));
@@ -49,7 +46,6 @@ const handleUpvote = async (solutionId) => {
   try {
     await dispatch(toggleUpvote(solutionId));
 
-    // Optional delay of 500ms
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     await dispatch(getSolutionsForProblem(id));
@@ -89,7 +85,6 @@ const handleDeleteSolution = async (solutionId) => {
       <p className="text-sm text-gray-500 mb-4">Posted By: {singleProblem.user?.fullName || 'Unknown'}</p>
 
 
-      {/* Solution Submission */}
       <div className="mt-8 mb-6">
         <h2 className="text-xl font-semibold mb-3">Write a Solution</h2>
         <textarea
@@ -107,7 +102,6 @@ const handleDeleteSolution = async (solutionId) => {
         </button>
       </div>
 
-      {/* Solutions */}
       <div className="mt-6">
         <h2 className="text-xl font-semibold mb-2">Solutions</h2>
         {solutionLoading ? (

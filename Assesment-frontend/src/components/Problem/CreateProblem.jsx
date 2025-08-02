@@ -1,15 +1,14 @@
-// components/Problem/CreateProblem.jsx
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProblem } from '../../redux/actions/problem';
 import { useNavigate } from 'react-router-dom';
-import Loader from '../common/Loader'; // ✅ import Loader
+import Loader from '../common/Loader';
 
 const CreateProblem = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.user);
-  const { loading } = useSelector((state) => state.problem); // ✅ get loading state
+  const { loading } = useSelector((state) => state.problem);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -58,7 +57,6 @@ const CreateProblem = () => {
     );
   }
 
-  // ✅ Show loader while submitting
   if (loading) {
     return <Loader />;
   }

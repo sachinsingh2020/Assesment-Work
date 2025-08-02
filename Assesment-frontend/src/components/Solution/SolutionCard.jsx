@@ -1,4 +1,3 @@
-// components/Solution/SolutionCard.jsx
 import React from 'react';
 import { ThumbsUp, Trash2 } from 'lucide-react';
 

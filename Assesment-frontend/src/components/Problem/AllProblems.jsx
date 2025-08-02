@@ -4,7 +4,7 @@ import { deleteProblem, getAllProblems } from '../../redux/actions/problem';
 import { logout } from '../../redux/actions/user';
 import ProblemCard from './ProblemCard';
 import { useNavigate } from 'react-router-dom';
-import Loader from '../common/Loader'; // ✅ Import Loader
+import Loader from '../common/Loader';
 
 const AllProblems = () => {
   const dispatch = useDispatch();
@@ -64,7 +64,6 @@ const AllProblems = () => {
         </div>
       </div>
 
-      {/* 🔄 Show loader while fetching */}
       {loading && <Loader />}
 
       {error && <p className="text-red-500">{error}</p>}

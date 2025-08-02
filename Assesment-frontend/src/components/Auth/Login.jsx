@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { login } from "../../redux/actions/user";
+import Loader from "../common/Loader"
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { message, error, isAuthenticated } = useSelector(
+    const { message, error, isAuthenticated, loading } = useSelector(
         (state) => state.user
     );
 
@@ -36,6 +37,8 @@ const Login = () => {
             dispatch({ type: "clearMessage" });
         }
     }, [dispatch, message, error, isAuthenticated, navigate]);
+
+    if (loading) return <Loader />;
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
