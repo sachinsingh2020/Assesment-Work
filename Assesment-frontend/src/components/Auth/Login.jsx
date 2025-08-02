@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../redux/actions/user";
 import toast from "react-hot-toast";
-import loginPageImage from "../assets/loginPageImage.jpg";
+import loginPageImage from "../../assets/loginPageImage.jpg";
+import { login } from "../../redux/actions/user";
 
 const Login = () => {
     const [email, setEmail] = useState("");

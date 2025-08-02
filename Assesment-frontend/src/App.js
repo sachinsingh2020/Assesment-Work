@@ -1,17 +1,26 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import { useSelector, useDispatch } from 'react-redux';
-import Register from './components/Register';
-import Home from './components/Home';
-import Login from './components/Login';
-import { isUserLoggedIn } from './redux/actions/user';
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
+
+import Home from "./components/Home";
+import Register from "./components/Auth/Register";
+import Login from "./components/Auth/Login";
+import AllProblems from "./components/Problem/AllProblems";
+import SingleProblem from "./components/Problem/SingleProblem";
+import CreateProblem from "./components/Problem/CreateProblem";
+
+import { isUserLoggedIn } from "./redux/actions/user";
 
 const App = () => {
   const { isAuthenticated } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  // Check authentication status on app load
   useEffect(() => {
     dispatch(isUserLoggedIn());
   }, [dispatch]);
@@ -19,21 +28,39 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {/* Redirect to Home if authenticated */}
+        {/* Auth Routes */}
         <Route
           path="/register"
-          element={isAuthenticated ? <Navigate to="/" /> : <Register />}
+          element={isAuthenticated ? <Navigate to="/problem" /> : <Register />}
         />
         <Route
           path="/login"
-          element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+          element={isAuthenticated ? <Navigate to="/problem" /> : <Login />}
         />
-        {/* Redirect to Login if not authenticated */}
+
+        {/* Protected Routes */}
         <Route
           path="/"
           element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
         />
+        <Route
+          path="/problem"
+          element={isAuthenticated ? <AllProblems /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/problem/:id"
+          element={
+            isAuthenticated ? <SingleProblem /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/problem/create"
+          element={
+            isAuthenticated ? <CreateProblem /> : <Navigate to="/login" />
+          }
+        />
       </Routes>
+
       <Toaster />
     </Router>
   );

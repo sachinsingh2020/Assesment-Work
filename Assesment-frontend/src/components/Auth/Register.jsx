@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../redux/actions/user';
-import signupPageImage from "../assets/signupPageImage.jpg";
+import signupPageImage from "../../assets/signupPageImage.jpg";
+import { register } from '../../redux/actions/user';
 
 const Register = () => {
     const [formData, setFormData] = useState({
